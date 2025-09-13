@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -148,16 +149,138 @@ func isValid_2(s string) bool {
 	return len(stack) == 0
 }
 
+// 4---------longestCommonPrefix
+func longestCommonPrefix_1(strs []string) string {
+	if len(strs) != 0 {
+		res := []rune{}
+		runestrs := []rune(strs[0])
+		for i := 0; i < len(runestrs); i++ {
+			flag := true
+			for j := 1; j < len(strs); j++ {
+				runestrss := []rune(strs[j])
+				if i >= len(runestrss) || runestrs[i] != runestrss[i] {
+					flag = false
+				}
+			}
+			if flag {
+				res = append(res, runestrs[i])
+			}
+		}
+		return string(res)
+	}
+	return ""
+}
+
+// 4---------longestCommonPrefix
+func longestCommonPrefix_2(strs []string) string {
+	if len(strs) == 0 {
+		return ""
+	}
+	first := []rune(strs[0])
+	for i := 0; i < len(first); i++ {
+		c := first[i]
+		for j := 1; j < len(strs); j++ {
+			runes := []rune(strs[j])
+			if i >= len(runes) || runes[i] != c {
+				return string(first[:i])
+			}
+		}
+	}
+	return string(first)
+}
+
+// 5---------plusOne
+func plusOne(digits []int) []int {
+	for i := 0; i < len(digits); i++ {
+		res := digits[len(digits)-1-i] + 1
+		if res == 10 {
+			digits[len(digits)-1-i] = 0
+		} else {
+			digits[len(digits)-1-i] += 1
+			return digits
+		}
+	}
+	return append([]int{1}, digits...)
+}
+
+// 6---------removeDuplicates
+func removeDuplicates(nums []int) int {
+	for i := len(nums) - 2; i >= 0; i-- {
+		x := nums[i+1]
+		if nums[i] == x {
+			nums = append(nums[:i], nums[i+1:]...)
+		}
+	}
+	return len(nums)
+}
+
+// 7---------merge
+func merge(intervals [][]int) [][]int {
+	if len(intervals) == 0 {
+		return [][]int{}
+	}
+
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+
+	res := [][]int{}
+	res = append(res, intervals[0])
+
+	for i := 1; i < len(intervals); i++ {
+		last := res[len(res)-1]
+		curr := intervals[i]
+		if curr[0] <= last[1] {
+			if curr[1] > last[1] {
+				last[1] = curr[1]
+			}
+			res[len(res)-1] = last
+		} else {
+			res = append(res, curr)
+		}
+	}
+	return res
+}
+
+// 8---------twoSum
+func twoSum(nums []int, target int) []int {
+	for i := 0; i < len(nums)-1; i++ {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i]+nums[j] == target {
+				return []int{i, j}
+			}
+		}
+	}
+	return nil
+}
+
 func main() {
-	array := []int{1, 2, 3, 4, 1, 2, 3, 4, 5}
-	fmt.Println("singleNumber_1:", singleNumber_1(array))
-	fmt.Println("singleNumber_2:", singleNumber_2(array))
+	// array := []int{1, 2, 3, 4, 1, 2, 3, 4, 5}
+	// fmt.Println("singleNumber_1:", singleNumber_1(array))
+	// fmt.Println("singleNumber_2:", singleNumber_2(array))
 
-	num := 121
-	fmt.Println(isPalindrome_1(num))
-	fmt.Println(isPalindrome_2(num))
+	// num := 121
+	// fmt.Println(isPalindrome_1(num))
+	// fmt.Println(isPalindrome_2(num))
 
-	str := "([)]"
-	fmt.Println(isValid_1(str))
-	fmt.Println(isValid_2(str))
+	// str := "([)]"
+	// fmt.Println(isValid_1(str))
+	// fmt.Println(isValid_2(str))
+
+	// strs := []string{"flower", "flow", "flight"}
+	// fmt.Println(longestCommonPrefix_1(strs))
+	// fmt.Println(longestCommonPrefix_2(strs))
+
+	// digits := []int{9, 9, 9}
+	// fmt.Println(plusOne(digits))
+
+	// digits := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	// fmt.Println(removeDuplicates(digits))
+
+	// digits := [][]int{{1, 4}, {0, 2}, {3, 5}}
+	// fmt.Println(merge(digits))
+
+	// digits := []int{3, 3}
+	// target := 6
+	// fmt.Println(twoSum(digits, target))
 }
