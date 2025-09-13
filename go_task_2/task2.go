@@ -6,17 +6,19 @@ import (
 	"time"
 )
 
-// ······················task1
+// ······················task1_1
 func function_int(num *int) {
 	*num += 10
 }
 
+// ······················task1_2
 func function_slice(nums *[]int) {
 	for i, num := range *nums {
 		(*nums)[i] = num * 2
 	}
 }
 
+// ······················task2_1
 func goroutinetask() {
 
 	var wg sync.WaitGroup
@@ -38,6 +40,7 @@ func goroutinetask() {
 	wg.Wait()
 }
 
+// ······················task2_2
 type Task func()
 
 func do_tasks(tasks []Task) {
@@ -55,6 +58,7 @@ func do_tasks(tasks []Task) {
 	wg.Wait()
 }
 
+// ······················task3_1
 type Shape interface {
 	Area()
 	Perimeter()
@@ -82,6 +86,7 @@ func (*Circle) Perimeter() {
 	fmt.Println("Circle-Perimeter")
 }
 
+// ······················task3_2
 type Person struct {
 	Name string
 	Age  int
