@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -100,6 +101,93 @@ func (employee *Employee) PrintInfo() {
 	fmt.Println(*employee)
 }
 
+// ······················task4_1
+func sendmessage_1() {
+	var wg sync.WaitGroup
+	wg.Add(2)
+	channel := make(chan (int))
+	go func() {
+		defer wg.Done()
+		for i := 1; i <= 10; i++ {
+			channel <- i
+		}
+		close(channel)
+	}()
+
+	go func() {
+		defer wg.Done()
+		for value := range channel {
+			fmt.Println("read channel value:", value)
+		}
+	}()
+
+	wg.Wait()
+}
+
+// ······················task4_2
+func sendmessage_2() {
+	var wg sync.WaitGroup
+	wg.Add(2)
+	channel := make(chan (int), 10)
+	go func() {
+		defer wg.Done()
+		for i := 1; i <= 100; i++ {
+			channel <- i
+			fmt.Println("write channel value:", i)
+		}
+		close(channel)
+	}()
+
+	go func() {
+		defer wg.Done()
+		for value := range channel {
+			fmt.Println("read channel value:", value)
+			time.Sleep(time.Second)
+		}
+	}()
+
+	wg.Wait()
+}
+
+var index int64 = 0
+
+// ······················task5_1 lock
+func addnum_1() {
+	var mu sync.Mutex
+
+	var wg sync.WaitGroup
+	wg.Add(10)
+
+	for i := 0; i < 10; i++ {
+		go func() {
+			defer wg.Done()
+			for i := 0; i < 1000; i++ {
+				mu.Lock()
+				index++
+				mu.Unlock()
+			}
+		}()
+	}
+	wg.Wait()
+	fmt.Println("index:", index)
+}
+
+// ······················task5_2 atomic
+func addnum_2() {
+	var wg sync.WaitGroup
+	wg.Add(10)
+
+	for i := 0; i < 10; i++ {
+		go func() {
+			defer wg.Done()
+			for i := 0; i < 1000; i++ {
+				atomic.AddInt64(&index, 1)
+			}
+		}()
+	}
+	wg.Wait()
+	fmt.Println("index:", index)
+}
 func main() {
 	// digit := 8
 	// function_int(&digit)
@@ -126,13 +214,19 @@ func main() {
 	// (&rectangle).Area()
 	// (&rectangle).Perimeter()
 
-	person := Person{
-		Name: "QX", Age: 22,
-	}
-	employee := Employee{
-		Person:     person,
-		EmployeeID: "9527",
-	}
-	(&employee).PrintInfo()
+	// person := Person{
+	// 	Name: "QX", Age: 22,
+	// }
+	// employee := Employee{
+	// 	Person:     person,
+	// 	EmployeeID: "9527",
+	// }
+	// (&employee).PrintInfo()
+
+	// sendmessage_1()
+	// sendmessage_2()
+
+	// addnum_1()
+	// addnum_2()
 
 }
