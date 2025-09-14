@@ -1,0 +1,10 @@
+2025-09-25T13:25:55.337+0800	[35mDEBUG[0m	go_task_4/app.go:13	debug 日志
+2025-09-25T13:25:55.337+0800	[34mINFO[0m	go_task_4/app.go:14	info 日志
+2025-09-25T13:25:55.337+0800	[33mWARN[0m	go_task_4/app.go:15	warn 日志
+2025-09-25T13:25:55.337+0800	[31mERROR[0m	go_task_4/app.go:16	error 日志
+2025-09-25T13:25:55.337+0800	[35mDEBUG[0m	go_task_4/app.go:18	1111
+2025-09-25T13:26:04.761+0800	[35mDEBUG[0m	go_task_4/app.go:13	debug 日志
+2025-09-25T13:26:04.761+0800	[34mINFO[0m	go_task_4/app.go:14	info 日志
+2025-09-25T13:26:04.761+0800	[33mWARN[0m	go_task_4/app.go:15	warn 日志
+2025-09-25T13:26:04.761+0800	[31mERROR[0m	go_task_4/app.go:16	error 日志
+2025-09-25T13:26:04.761+0800	[35mDEBUG[0m	go_task_4/app.go:18	1111
