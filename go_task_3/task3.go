@@ -403,9 +403,9 @@ func main() {
 
 	// fmt.Println(res.PostID, res.Count)
 
-	comment := Comment{}
-	db.Where("id = ?", 8).Preload("User").Preload("Post").First(&comment)
-	db.Delete(&comment)
+	// comment := Comment{}
+	// db.Where("id = ?", 8).Preload("User").Preload("Post").First(&comment)
+	// db.Delete(&comment)
 
 	if err != nil {
 		log.Fatal(err)
