@@ -24,7 +24,7 @@ type Config struct {
 	DBName   string
 }
 
-func InitDataBase() {
+func InitDataBase() error {
 
 	dbconfig := &Config{
 		Host:     viper.GetString("database.host"),
@@ -53,11 +53,14 @@ func InitDataBase() {
 	)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{Logger: newLogger})
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	DB = db
 	//初始化 检查 创建 所有表
-	DB.AutoMigrate(&model.User{}, &model.Post{}, &model.Comment{})
-
+	res := DB.AutoMigrate(&model.User{}, &model.Post{}, &model.Comment{})
+	if res != nil {
+		return res
+	}
+	return nil
 }

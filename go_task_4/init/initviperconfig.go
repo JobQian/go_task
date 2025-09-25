@@ -26,6 +26,6 @@ func InitViperConfig(namestr string, typestr string, pathstr string) {
 	viper.WatchConfig()
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("配置文件被修改:", in.Name)
-	})
 
+	})
 }
