@@ -18,8 +18,7 @@ func main() {
 	sqlDB, err := initconfig.DB.DB()
 
 	if err != nil {
-		utils.Logger.Debug("数据库关闭失败: " + err.Error())
-		panic(fmt.Errorf("数据库关闭失败: %w", err))
+		utils.Logger.Debug("获取底层数据库实例失败: " + err.Error())
 	}
 
 	defer sqlDB.Close()
