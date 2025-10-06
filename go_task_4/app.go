@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	initconfig "go_task_4/init"
+<<<<<<< HEAD
 	"go_task_4/internal/handler"
 	"go_task_4/internal/repository"
 	"go_task_4/internal/router"
@@ -11,6 +12,9 @@ import (
 	"net/http"
 
 	"github.com/spf13/viper"
+=======
+	"go_task_4/pkg/utils"
+>>>>>>> d7ec24b276d863d05d3c77537f56a03b8a283f67
 )
 
 func main() {
@@ -21,6 +25,7 @@ func main() {
 		utils.Logger.Debug("数据库连接失败: " + res.Error())
 		panic(fmt.Errorf("数据库连接失败: %w", res))
 	}
+<<<<<<< HEAD
 	userrepository := repository.NewUserRepository(initconfig.DB)
 	userService := service.NewUserService(userrepository)
 	userHandler := handler.NewUserHandler(userService)
@@ -38,11 +43,17 @@ func main() {
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		panic(err)
 	}
+=======
+>>>>>>> d7ec24b276d863d05d3c77537f56a03b8a283f67
 
 	sqlDB, err := initconfig.DB.DB()
 
 	if err != nil {
 		utils.Logger.Debug("获取底层数据库实例失败: " + err.Error())
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> d7ec24b276d863d05d3c77537f56a03b8a283f67
 	defer sqlDB.Close()
 }
