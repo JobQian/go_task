@@ -37,10 +37,10 @@ func (p *PostRepository) GetByID(id int) (*model.Post, error) {
 	return &post, err
 }
 
-func (p *PostRepository) GetByUserID(id int) (*[]model.Post, error) {
+func (p *PostRepository) GetByUserID(id int) ([]model.Post, error) {
 	posts := []model.Post{}
 	err := p.db.Model(&model.Post{}).Where("user_id = ?", id).Find(&posts).Error
-	return &posts, err
+	return posts, err
 }
 
 func (p *PostRepository) FindAll() ([]model.Post, error) {
@@ -61,8 +61,8 @@ func (p *PostRepository) Delete(post model.Post) error {
 	return err
 }
 
-func (p *PostRepository) Count() error {
+func (p *PostRepository) Count() (int64, error) {
 	var total int64
 	err := p.db.Model(&model.Post{}).Count(&total).Error
-	return err
+	return total, err
 }

@@ -38,17 +38,17 @@ func (c *CommentRepository) GetByID(id int) (*model.Comment, error) {
 }
 
 // 预加载文章
-func (c *CommentRepository) GetByUserID(id int) (*[]model.Comment, error) {
+func (c *CommentRepository) GetByUserID(id int) ([]model.Comment, error) {
 	comments := []model.Comment{}
 	err := c.db.Model(&model.Comment{}).Preload("Post").Where("user_id = ?", id).Find(&comments).Error
-	return &comments, err
+	return comments, err
 }
 
 // 预加载用户
-func (c *CommentRepository) GetByPostID(id int) (*[]model.Comment, error) {
+func (c *CommentRepository) GetByPostID(id int) ([]model.Comment, error) {
 	comments := []model.Comment{}
 	err := c.db.Model(&model.Comment{}).Preload("User").Where("post_id = ?", id).Find(&comments).Error
-	return &comments, err
+	return comments, err
 }
 
 func (c *CommentRepository) Update(comment model.Comment) error {
@@ -59,11 +59,5 @@ func (c *CommentRepository) Update(comment model.Comment) error {
 // 软删除
 func (c *CommentRepository) Delete(comment model.Comment) error {
 	err := c.db.Model(&model.User{}).Delete(&comment).Error
-	return err
-}
-
-func (c *CommentRepository) Count() error {
-	var total int64
-	err := c.db.Model(&model.Comment{}).Count(&total).Error
 	return err
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouter(userhandler *handler.UserHandler) *gin.Engine {
+func NewRouter(userhandler *handler.UserHandler, posthandler *handler.PostHandler, commentnandler *handler.CommentHandler) *gin.Engine {
 	r := gin.Default()
 
 	apiV1 := r.Group("/api/v1")

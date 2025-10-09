@@ -21,10 +21,18 @@ func main() {
 		utils.Logger.Debug("数据库连接失败: " + res.Error())
 		panic(fmt.Errorf("数据库连接失败: %w", res))
 	}
+
 	userrepository := repository.NewUserRepository(initconfig.DB)
-	userService := service.NewUserService(userrepository)
-	userHandler := handler.NewUserHandler(userService)
-	router := router.NewRouter(userHandler)
+	userservice := service.NewUserService(userrepository)
+	userhandler := handler.NewUserHandler(userservice)
+	postrepository := repository.NewPostRepository(initconfig.DB)
+	postservice := service.NewPostService(postrepository)
+	posthandler := handler.NewPostHandler(postservice)
+	commentrepository := repository.NewCommentRepository(initconfig.DB)
+	commentservcie := service.NewCommentService(commentrepository)
+	commenthandler := handler.NewCommentHandler(commentservcie)
+
+	router := router.NewRouter(userhandler, posthandler, commenthandler)
 
 	// 使用 http.Server 包装
 	srv := &http.Server{
