@@ -30,9 +30,10 @@ func (p *PostRepository) Create(post *model.Post) error {
 	return err
 }
 
+// 预加载用户
 func (p *PostRepository) GetByID(id int) (*model.Post, error) {
 	post := model.Post{}
-	err := p.db.Model(&model.Post{}).Where("id = ?", id).First(&post).Error
+	err := p.db.Model(&model.Post{}).Preload("User").Where("id = ?", id).First(&post).Error
 	return &post, err
 }
 

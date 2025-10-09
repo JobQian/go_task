@@ -30,21 +30,24 @@ func (c *CommentRepository) Create(comment *model.Comment) error {
 	return err
 }
 
+// 预加载用户和文章
 func (c *CommentRepository) GetByID(id int) (*model.Comment, error) {
 	comment := model.Comment{}
-	err := c.db.Model(&model.Comment{}).Where("id = ?", id).First(&comment).Error
+	err := c.db.Model(&model.Comment{}).Preload("User").Preload("Post").Where("id = ?", id).First(&comment).Error
 	return &comment, err
 }
 
+// 预加载文章
 func (c *CommentRepository) GetByUserID(id int) (*[]model.Comment, error) {
 	comments := []model.Comment{}
-	err := c.db.Model(&model.Comment{}).Where("user_id = ?", id).Find(&comments).Error
+	err := c.db.Model(&model.Comment{}).Preload("Post").Where("user_id = ?", id).Find(&comments).Error
 	return &comments, err
 }
 
+// 预加载用户
 func (c *CommentRepository) GetByPostID(id int) (*[]model.Comment, error) {
 	comments := []model.Comment{}
-	err := c.db.Model(&model.Comment{}).Where("post_id = ?", id).Find(&comments).Error
+	err := c.db.Model(&model.Comment{}).Preload("User").Where("post_id = ?", id).Find(&comments).Error
 	return &comments, err
 }
 
