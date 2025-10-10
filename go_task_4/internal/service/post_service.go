@@ -80,6 +80,7 @@ func (p *PostService) GetByID(id int) (*model.Post, error) {
 	}
 	return post, nil
 }
+
 func (p *PostService) GetByUserID(id int) ([]model.Post, error) {
 	if id == 0 {
 		return []model.Post{}, errors.New("invalid ID")
