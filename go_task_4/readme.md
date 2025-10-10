@@ -64,22 +64,40 @@
  ┣ 📜go.sum
  ┗ 📜readme.txt
 ```
+
+## 功能特性
+
+- 用户管理：注册、登录、个人资料管理
+- 文章管理：创建、编辑、删除、查看文章
+- 评论系统：发表评论、回复评论
+
+## 技术栈
+
+- Go语言
+- Gin Web框架
+- MySQL数据库
+- gorm库
+- JWT认证
+- Viper配置管理
+- zap日志库
+- swagger接口文档库
+
 ## 安装依赖库： [根目录下 eg：../go_task_4/ 进入到这个根目录下]
         go get gorm.io/gorm                 ---安装gorm库
         go get gorm.io/driver/mysql         ---安装gorm库的mysql数据库驱动
         go get github.com/spf13/viper       ---安装 服务器配置管理库
         go get go.uber.org/zap              ---安装 日志库 zap库 适用于高并发高性能的服务 主流选择
         go get -u github.com/gin-gonic/gin  ---安装 gin web框架
-        
-        MACOS 配置JWT生成token时需要的盐（bashrc/zshrc）
-        终端输入：
-        echo 'export JWT_SECRET="123456789"' >> ~/.bashrc
-        echo 'export JWT_SECRET="123456789"' >> ~/.zshrc
-        source ~/.bashrc
-        source ~/.zshrc
-        检验：
-        echo $JWT_SECRET
-
+                ```
+                MACOS 配置JWT生成token时需要的盐（bashrc/zshrc）
+                终端输入：
+                echo 'export JWT_SECRET="123456789"' >> ~/.bashrc
+                echo 'export JWT_SECRET="123456789"' >> ~/.zshrc
+                source ~/.bashrc
+                source ~/.zshrc
+                检验：
+                echo $JWT_SECRET
+                ```
         swagger接口文档库
         go install github.com/swaggo/swag/cmd/swag@latest
         安装好之后配置环境变量 macos为例：
