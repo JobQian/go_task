@@ -98,8 +98,8 @@
                 检验：
                 echo $JWT_SECRET
                 
-        swagger接口文档库
-        go install github.com/swaggo/swag/cmd/swag@latest
+        
+        go install github.com/swaggo/swag/cmd/swag@latest       ---swagger接口文档库
                 安装好之后配置环境变量 macos为例：
                 查看 GOPATH
                 go env GOPATH
