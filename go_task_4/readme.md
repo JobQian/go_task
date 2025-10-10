@@ -135,3 +135,10 @@
 - `GET /api/v1/commentsbypostid/:id` - 获取文章所有评论详情
 - `PUT /api/v1/comment/:id` - 更新评论
 - `DELETE /api/v1/comment/:id` - 删除评论
+
+更多详细信息 请部署项目后访问：
+http://localhost:8989/swagger/index.html#/      根据项目中注释情况 自动生成接口文档
+
+## 许可证
+
+本项目采用 MIT 许可证。
