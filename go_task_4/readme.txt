@@ -14,4 +14,20 @@
         source ~/.zshrc
         检验：
         echo $JWT_SECRET
-        
+
+        swagger接口文档库
+        go install github.com/swaggo/swag/cmd/swag@latest
+        安装好之后配置环境变量 macos为例：
+        # 查看 GOPATH
+        go env GOPATH
+        # 把 GOPATH/bin 加入 PATH（zsh）
+        echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.zshrc
+        source ~/.zshrc
+        # 验证
+        swag --version
+        # or
+        which swag
+
+        go get github.com/swaggo/gin-swagger@latest
+        go get github.com/swaggo/files@latest
+

@@ -4,7 +4,11 @@ import (
 	"go_task_4/internal/handler"
 	"go_task_4/pkg/utils"
 
+	_ "go_task_4/docs"
+
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func NewRouter(userhandler *handler.UserHandler, posthandler *handler.PostHandler, commentnandler *handler.CommentHandler) *gin.Engine {
@@ -37,5 +41,7 @@ func NewRouter(userhandler *handler.UserHandler, posthandler *handler.PostHandle
 		auth.PUT("/comment/:id", commentnandler.UpdateComment)
 		auth.DELETE("/comment/:id", commentnandler.DeleteComment)
 	}
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r
 }

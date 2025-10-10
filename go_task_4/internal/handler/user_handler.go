@@ -23,6 +23,15 @@ func NewUserHandler(service *service.UserService) *UserHandler {
 	return &UserHandler{userService: service}
 }
 
+// @Summary 用户注册
+// @Description 用户注册接口，用于创建新用户
+// @Tags 用户模块
+// @Accept json
+// @Produce json
+// @Param data body UserRequest true "用户注册参数"
+// @Success 200 {object} map[string]interface{} "注册成功"
+// @Failure 400 {object} map[string]interface{} "请求错误"
+// @Router /api/v1/register [post]
 func (u *UserHandler) Register(c *gin.Context) {
 	var req UserRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
