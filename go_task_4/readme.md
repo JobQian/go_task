@@ -88,7 +88,6 @@
         go get github.com/spf13/viper       ---安装 服务器配置管理库
         go get go.uber.org/zap              ---安装 日志库 zap库 适用于高并发高性能的服务 主流选择
         go get -u github.com/gin-gonic/gin  ---安装 gin web框架
-                
                 MACOS 配置JWT生成token时需要的盐（bashrc/zshrc）
                 终端输入：
                 echo 'export JWT_SECRET="123456789"' >> ~/.bashrc
@@ -97,8 +96,6 @@
                 source ~/.zshrc
                 检验：
                 echo $JWT_SECRET
-                
-        
         go install github.com/swaggo/swag/cmd/swag@latest       ---swagger接口文档库
                 安装好之后配置环境变量 macos为例：
                 查看 GOPATH
@@ -113,3 +110,28 @@
         go get github.com/swaggo/gin-swagger@latest
         go get github.com/swaggo/files@latest
 
+## API文档
+
+### 用户相关
+
+- `POST /api/v1/register` - 注册新用户
+- `POST /api/v1/login` - 用户登录
+
+### 文章相关
+
+- `POST /api/v1/post` - 创建文章
+- `GET /api/v1/postbyid/:id` - 获取文章详情
+- `GET /api/v1/allposts` - 获取文章详情
+- `GET /api/v1/postsbyuserid/:id` - 获取用户所有文章详情
+- `PUT /api/v1/post/:id` - 更新文章
+- `DELETE /api/v1/post/:id` - 删除文章
+- `GET /api/v1/posts` - 获取文章列表
+
+### 评论相关
+
+- `POST /api/v1/comment` - 创建评论
+- `GET /api/v1/commentbyid/:id` - 获取评论详情
+- `GET /api/v1/commentsbyuserid/:id` - 获取用户所有评论详情
+- `GET /api/v1/commentsbypostid/:id` - 获取文章所有评论详情
+- `PUT /api/v1/comment/:id` - 更新评论
+- `DELETE /api/v1/comment/:id` - 删除评论
