@@ -100,7 +100,24 @@ contract task01{
     }
     //···································05
     function mergeSortedArray(bytes memory first,bytes memory second) public pure returns(bytes memory){
+                return abi.encodePacked(first, second);
+    }
+    function mergeSortedArray(uint[] memory first,uint[] memory second) public pure returns(uint[] memory){
+        uint[] memory result = new uint[](a.length + b.length);
+        uint k = 0;
 
+        for (uint i = 0; i < a.length; i++) {
+            result[k++] = a[i];
+        }
+
+        for (uint i = 0; i < b.length; i++) {
+            result[k++] = b[i];
+        }
+
+        return result;
+    }
+    function mergeSortedArray(string memory first,string memory second) public pure returns(string memory){
+            return string(abi.encodePacked(first, second));
     }
     //···································06
     function binarySearch(int taget) public view returns (int){
