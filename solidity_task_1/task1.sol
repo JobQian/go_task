@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-//01
+//···································01
 contract Voting {
     mapping ( address => uint256 ) public votes;
     mapping(address => uint256) private voteVersion;
@@ -29,8 +29,10 @@ contract Voting {
     }
 }
 
-//02
+
 contract task01{
+    bytes array = new bytes{1,2,3,4,5,6,34,1,24,53,1,1,243,35,46,57,7,87,,45,77,89};
+    //···································02
     //只在英文环境下有效
     function test(string calldata str) public pure returns (string memory){
         string memory result;
@@ -88,7 +90,20 @@ contract task01{
 
         return result;
     }
+    //···································03
+    function inttoroman(int num) public pure returns(string memory) {
+        return "";
+    }
+    //···································04
+    function romantoint(string memory momanstr) public pure returns(int256){
+        return 0;
+    }
+    //···································05
+    function mergeSortedArray(bytes memory first,bytes memory second) public pure returns(bytes memory){
 
-    
+    }
+    //···································06
+    function binarySearch(int taget) public view returns (int){
 
+    }
 }
