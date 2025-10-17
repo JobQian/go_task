@@ -31,7 +31,6 @@ contract Voting {
 
 
 contract task01{
-    bytes array = new bytes{1,2,3,4,5,6,34,1,24,53,1,1,243,35,46,57,7,87,,45,77,89};
     //···································02
     //只在英文环境下有效
     function test(string calldata str) public pure returns (string memory){
@@ -92,10 +91,12 @@ contract task01{
     }
     //···································03
     function inttoroman(int num) public pure returns(string memory) {
+
         return "";
     }
     //···································04
     function romantoint(string memory momanstr) public pure returns(int256){
+        
         return 0;
     }
     //···································05
@@ -103,15 +104,15 @@ contract task01{
                 return abi.encodePacked(first, second);
     }
     function mergeSortedArray(uint[] memory first,uint[] memory second) public pure returns(uint[] memory){
-        uint[] memory result = new uint[](a.length + b.length);
+        uint[] memory result = new uint[](first.length + second.length);
         uint k = 0;
 
-        for (uint i = 0; i < a.length; i++) {
-            result[k++] = a[i];
+        for (uint i = 0; i < first.length; i++) {
+            result[k++] = first[i];
         }
 
-        for (uint i = 0; i < b.length; i++) {
-            result[k++] = b[i];
+        for (uint i = 0; i < second.length; i++) {
+            result[k++] = second[i];
         }
 
         return result;
@@ -120,7 +121,23 @@ contract task01{
             return string(abi.encodePacked(first, second));
     }
     //···································06
-    function binarySearch(int taget) public view returns (int){
+    function binarySearch(int target) public pure returns (int index){
+        int[19] memory arr = [int(-1),2,3,4,5,6,7,8,9,11,15,57,59,67,90,91,116,222,776];
+        
+        uint low = 0;
+        uint high = arr.length - 1;
 
+        while (low <= high) {
+            uint mid = low + (high - low) / 2;
+            if (arr[mid] == target) {
+                return int(mid); // 找到返回索引
+            } else if (arr[mid] < target) {
+                low = mid + 1;
+            } else {
+                if (mid == 0) break; // 防止无符号整数溢出
+                high = mid - 1;
+            }
+        }
+        return -1; // 未找到
     }
 }
